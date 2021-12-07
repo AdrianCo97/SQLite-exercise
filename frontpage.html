@@ -8,6 +8,8 @@
     <script src="scripts.js"></script>
 </head>
 <script>
+
+    let userArray = [];
     async function postData(){
         const firstname = document.getElementById("firstname").value;
         const lastname = document.getElementById("lastname").value;
@@ -22,11 +24,27 @@
         });
         console.log(response)
     }
+
+    async function getAllUsers(){
+        let result = await fetch("http://localhost:5000/")
+        .then(response => response.json())
+        .then(data => userArray = data);
+
+        userArray.forEach((user) => {
+            document.getElementById("array").innerHTML += `<div>${user.firstname} ${user.lastname}</div>`      
+        })
+    }
 </script>
 <body>
-    <input type = "text" id="firstname"/>  
-    <input type = "text" id="lastname"/>  
+    <input type = "text" id="firstname" required/>  
+    <input type = "text" id="lastname" required/>  
 
     <button onclick="postData()">Click me!</button>
+
+    <button onclick="getAllUsers()">Get all users</button>
+
+    <div id="array">
+
+    </div>
 </body>
 </html>
