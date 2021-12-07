@@ -19,6 +19,14 @@ app.get("/", (req, res) => {
     res.send(result);
 });
 
+app.get("/:id", (req, res) => {
+    let preparedStatement = db.prepare("SELECT * FROM users WHERE userID = ?");
+
+    let user = preparedStatement.get(req.params.id);
+
+    res.send(user);
+})
+
 app.post("/", (req, res) => {
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
@@ -28,6 +36,3 @@ app.post("/", (req, res) => {
 
     return res.send("Data inserted!");
 })
-
-
-
