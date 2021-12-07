@@ -1,10 +1,17 @@
 const express = require("express");
 const Database = require("better-sqlite3");
+const cors = require("cors");
 
 const app = express();
 const PORT = 5000;
 
 app.use(express.json());
+
+app.use(
+    cors({
+        origin: "http://127.0.0.1:5500"
+    })
+)
 
 const db = new Database('./backend/users.db');
 

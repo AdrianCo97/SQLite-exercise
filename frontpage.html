@@ -5,11 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width='device-width', initial-scale=1.0">
     <title>Document</title>
-    <script src="index.js"></script>
+    <script src="scripts.js"></script>
 </head>
-<body>
+<script>
+    async function postData(){
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const user = {firstname, lastname}
 
-    <h1>Hello</h1>
-    
+        const response = await fetch("http://localhost:5000/", {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+        });
+        console.log(response)
+    }
+</script>
+<body>
+    <input type = "text" id="firstname"/>  
+    <input type = "text" id="lastname"/>  
+
+    <button onclick="postData()">Click me!</button>
 </body>
 </html>
