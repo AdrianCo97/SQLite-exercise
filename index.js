@@ -25,6 +25,8 @@ app.post("/", (req, res) => {
 
     const insert = db.prepare("INSERT INTO users (firstname, lastname) VALUES(?,?)");
     insert.run(firstname, lastname);
+
+    return res.send("Data inserted!");
 })
 
 
